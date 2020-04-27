@@ -19,3 +19,12 @@ variable boot_disk_size {
 variable boot_disk_type {
   type = string
 }
+
+variable "packer_image" {
+  type = string
+}
+
+variable "environment" {
+  type = string
+}
+

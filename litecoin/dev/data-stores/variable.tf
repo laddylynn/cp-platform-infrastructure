@@ -1,11 +1,30 @@
+resource "random_id" "disk_id" {
+  byte_length = 4
+}
+
 variable "snapshot_policy_name" {
   type = string
   default = "coolbitx-policy-0423"
 }
 
+variable "region" {
+  type = string
+  default = "asia-east1"
+}
+
 variable "zone" {
   type = string
   default = "asia-east1-b"
+}
+
+variable "packer_image" {
+  type = string
+  default = "packer-experiment-1587777660"
+}
+
+variable "environment" {
+  type = string
+  default = "dev"
 }
 
 variable "project" {
@@ -15,7 +34,7 @@ variable "project" {
 
 variable "name" {
   type = string
-  default = "experiment-0426"
+  default = "experiment"
 }
 
 variable boot_disk_size {
