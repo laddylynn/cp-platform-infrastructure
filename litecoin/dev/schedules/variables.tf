@@ -1,5 +1,5 @@
 
-variable "policy_name" {
+variable "snapshot_policy_name" {
   type = string
   default = "litecoin-policy"
 }

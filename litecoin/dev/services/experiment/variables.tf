@@ -4,7 +4,7 @@ resource "random_id" "disk_id" {
 
 variable "snapshot_policy_name" {
   type = string
-  default = "coolbitx-policy-0423"
+  default = "litecoin-policy"
 }
 
 variable "region" {

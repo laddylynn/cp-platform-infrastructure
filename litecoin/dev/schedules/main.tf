@@ -12,7 +12,7 @@ module "snapshot_policy" {
   retention_policy = var.retention_policy
   label = var.label
   hours_in_cycle = var.hours_in_cycle
-  policy_name = var.policy_name 
+  policy_name = var.snapshot_policy_name 
 }
 
 

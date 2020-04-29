@@ -1,6 +1,5 @@
 module ledger {
     source = "../../../modules/data-stores"
-    name = var.name
     project = var.project
     boot_disk_type = var.boot_disk_type
     boot_disk_size = var.boot_disk_size
@@ -31,14 +30,14 @@ module "snapshot_policy" {
   retention_policy = var.retention_policy
   label = var.label
   hours_in_cycle = var.hours_in_cycle
-  policy_name = var.policy_name 
+  snapshot_policy_name = var.snapshot_policy_name 
 }
 
-# resource "google_compute_disk_resource_policy_attachment" "attachment" {
-#   name = google_compute_resource_policy.backup_policy.name
-#   disk = "experiment-0423"
-#   zone = "asia-east1-b"
-# }
+resource "google_compute_disk_resource_policy_attachment" "attachment" {
+  name = module.snapshot_policy.snapshot_policy_name
+  disk = module.ledger.ledger_name
+  zone = var.zone
+}
 
 resource "google_compute_instance" "vm1" {
   name         = "experiment-instance-1"

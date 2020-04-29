@@ -2,11 +2,6 @@ resource "random_id" "disk_id" {
   byte_length = 4
 }
 
-variable "snapshot_policy_name" {
-  type = string
-  default = "coolbitx-policy-0423"
-}
-
 variable "region" {
   type = string
   default = "asia-east1"
