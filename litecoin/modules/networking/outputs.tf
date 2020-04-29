@@ -17,7 +17,3 @@ output "vpc_network" {
 output "subnetwork_ip_ranges" {
   value = google_compute_subnetwork.network-with-private-secondary-ip-ranges
 }
-
-
-
-

@@ -21,6 +21,25 @@ module networking {
     region = var.region
 }
 
+module "snapshot_policy" {
+  source = "../../../modules/schedules"
+  start_time = var.start_time
+  storage_locations = var.storage_locations
+  zone = var.zone
+  region = var.region
+  project = var.project
+  retention_policy = var.retention_policy
+  label = var.label
+  hours_in_cycle = var.hours_in_cycle
+  policy_name = var.policy_name 
+}
+
+# resource "google_compute_disk_resource_policy_attachment" "attachment" {
+#   name = google_compute_resource_policy.backup_policy.name
+#   disk = "experiment-0423"
+#   zone = "asia-east1-b"
+# }
+
 resource "google_compute_instance" "vm1" {
   name         = "experiment-instance-1"
   machine_type = "f1-micro"

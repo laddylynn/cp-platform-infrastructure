@@ -3,7 +3,7 @@ resource "random_id" "disk_id" {
 }
 
 resource "google_compute_disk" "default" {
-  name  = "${var.environment}-disk-${random_id.disk_id.hex}"
+  name  = "${var.environment}-litecoin-${random_id.disk_id.hex}"
   project = var.project
   type = var.boot_disk_type
   zone  = var.zone

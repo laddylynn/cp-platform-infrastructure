@@ -32,9 +32,9 @@ variable "project" {
   default = "sandbox-272805"
 }
 
-variable "name" {
+variable "ledger_name" {
   type = string
-  default = "experiment"
+  default = "level_db"
 }
 
 variable boot_disk_size {
