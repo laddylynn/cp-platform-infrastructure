@@ -49,3 +49,8 @@ variable "hours_in_cycle" {
   type = number
   default = 1
 }
+
+variable "environment" {
+  type = string
+  default = "dev"
+}

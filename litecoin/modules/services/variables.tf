@@ -40,6 +40,14 @@ variable "ports" {
   type = list(string)
 }
 
+variable "network_ip" {
+  type = list(string)
+}
+
+variable "machine_type" {
+  type = string
+}
+
 variable "range_name" {
   type = string
 }
@@ -71,4 +79,13 @@ variable "storage_locations" {
 variable "hours_in_cycle" {
   type = number
 }
+
+variable "metadata_startup_script" {
+  type = string
+}
+
+variable "snapshot" {
+  type = string
+}
+
 

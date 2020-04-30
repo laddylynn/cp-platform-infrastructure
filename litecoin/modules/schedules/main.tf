@@ -3,7 +3,7 @@ resource "random_id" "instance_id" {
 }
 
 resource "google_compute_resource_policy" "snapshot_policy" {
-  name   = "${var.snapshot_policy_name}-${random_id.instance_id.hex}"
+  name   = "${var.environment}-${var.snapshot_policy_name}-${random_id.instance_id.hex}"
   region = var.region
   snapshot_schedule_policy {
     schedule {

@@ -23,6 +23,11 @@ variable "range_name" {
   default = "tf-test-secondary-range-update1"
 }
 
+variable "environment" {
+  type = string
+  default = "dev"
+}
+
 variable "terms" {
   default = {
       network_protocols = ["icmp", "tcp"],

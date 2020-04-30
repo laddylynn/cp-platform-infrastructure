@@ -24,3 +24,7 @@ variable "environment" {
   type = string
 }
 
+variable "snapshot" {
+  type = string
+}
+

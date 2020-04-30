@@ -10,9 +10,10 @@
         "disk_size": "50",
         "zone": "asia-east1-a",
         "image_description": "created-with-packer-for-eletrumx-testnet",
+        "image_name": "electrumx-dev-{{timestamp}}",
         "ssh_username": "aaronchou",
         "tags": "packer",
-        "account_file": "../../account.json"
+        "account_file": "../../../../../account.json"
       }
     ],
     "provisioners": [

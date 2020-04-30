@@ -6,6 +6,7 @@ module ledger {
   zone = var.zone
   packer_image = var.packer_image
   environment = var.environment
+  snapshot = var.snapshot
 }
 
 module networking {
@@ -18,6 +19,7 @@ module networking {
   }
   range_name = var.range_name
   region = var.region
+  environment = var.environment
 }
 
 module "snapshot_policy" {
@@ -31,6 +33,7 @@ module "snapshot_policy" {
   label = var.label
   hours_in_cycle = var.hours_in_cycle
   snapshot_policy_name = var.snapshot_policy_name 
+  environment = var.environment
 }
 
 resource "google_compute_disk_resource_policy_attachment" "attachment" {
@@ -39,9 +42,9 @@ resource "google_compute_disk_resource_policy_attachment" "attachment" {
   zone = var.zone
 }
 
-resource "google_compute_instance" "vm1" {
-  name         = "experiment-instance-1"
-  machine_type = "f1-micro"
+resource "google_compute_instance" "vm" {
+  name         = "${var.environment}-experiment-instance"
+  machine_type = var.machine_type
 
   boot_disk {
     source = module.ledger.self_link
@@ -51,10 +54,14 @@ resource "google_compute_instance" "vm1" {
     scopes =["logging-write", "monitoring-write"]
   }
 
+  metadata_startup_script = var.metadata_startup_script
+
   network_interface {
     network = module.networking.vpc_network.self_link
 
     subnetwork = module.networking.subnetwork_ip_ranges.self_link
+
+    network_ip = var.network_ip[0]
 
     access_config {
       # // Ephemeral IP

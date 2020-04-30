@@ -1,5 +1,4 @@
 
-
 module "experiment" {
   source = "../../../modules/services"
   ports = var.ports
@@ -19,6 +18,10 @@ module "experiment" {
   start_time = var.start_time
   storage_locations = var.storage_locations
   packer_image = var.packer_image
+  metadata_startup_script = var.metadata_startup_script
+  snapshot = var.snapshot
+  network_ip = var.network_ip
+  machine_type = var.machine_type
 }
 
 

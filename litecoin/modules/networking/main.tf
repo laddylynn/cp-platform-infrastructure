@@ -3,7 +3,7 @@ resource "random_id" "instance_id" {
 }
 
 resource "google_compute_subnetwork" "network-with-private-secondary-ip-ranges" {
-  name = "litecoin-network-${random_id.instance_id.hex}"
+  name = "${var.environment}-litecoin-network-${random_id.instance_id.hex}"
   ip_cidr_range = var.terms["ip_cidr_range"][0]
   region        = var.region
   network       = google_compute_network.vpc_network.self_link
@@ -14,12 +14,12 @@ resource "google_compute_subnetwork" "network-with-private-secondary-ip-ranges" 
 }
 
 resource "google_compute_network" "vpc_network" {
-  name                    = "test-network"
+  name                    = "${var.environment}-litecoin-network"
   auto_create_subnetworks = false
 }
 
 resource "google_compute_firewall" "default" {
-  name    = "litecoin-firewall-${random_id.instance_id.hex}"
+  name    = "${var.environment}-litecoin-firewall-${random_id.instance_id.hex}"
   network = google_compute_network.vpc_network.self_link
 
   allow {

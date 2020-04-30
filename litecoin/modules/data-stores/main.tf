@@ -12,4 +12,5 @@ resource "google_compute_disk" "default" {
     environment = var.environment
   }
   physical_block_size_bytes = 4096
+  snapshot = var.snapshot
 }

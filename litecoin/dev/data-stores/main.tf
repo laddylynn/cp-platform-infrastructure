@@ -7,4 +7,5 @@ module ledger {
     zone = var.zone
     packer_image = var.packer_image
     environment = var.environment
+    snapshot = var.snapshot
 }

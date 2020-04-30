@@ -38,6 +38,10 @@ variable "hours_in_cycle" {
   type = number
 }
 
+variable "environment" {
+  type = string
+}
+
 
 
 

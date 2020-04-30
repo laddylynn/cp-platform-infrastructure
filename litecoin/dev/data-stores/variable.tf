@@ -14,7 +14,8 @@ variable "zone" {
 
 variable "packer_image" {
   type = string
-  default = "packer-experiment-1587777660"
+  default = ""
+  # default = "packer-experiment-1587777660"
 }
 
 variable "environment" {
@@ -42,3 +43,9 @@ variable boot_disk_type {
   type = string
   default = "pd-ssd"
 }
+
+variable "snapshot" {
+  type = string
+  default = "iwm5rki8u1x3"
+}
+

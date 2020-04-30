@@ -8,4 +8,5 @@ module networking {
     }
     range_name = var.range_name
     region = var.region
+    environment = var.environment
 }

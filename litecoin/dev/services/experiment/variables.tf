@@ -93,6 +93,26 @@ variable "storage_locations" {
 
 variable "hours_in_cycle" {
   type = number
-  default = 1
+  default = 12
 }
 
+variable "metadata_startup_script" {
+  type = string
+  default = ""
+}
+
+variable "snapshot" {
+  type = string
+  default = ""
+}
+
+variable "network_ip" {
+  type = list(string)
+  default = ["10.2.0.2", "10.2.0.3"]
+}
+
+
+variable "machine_type" {
+  type = string
+  default = "n1-standard-2"
+}

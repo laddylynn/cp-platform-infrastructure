@@ -3,19 +3,21 @@
       "project_id": "sandbox-272805",
       "bdb_prefix": "/home/aaronchou/storage/litecoin/db4",
       "litecoin_root": "/home/aaronchou/storage/litecoin",
-      "userId": "aaronchou"
+      "userId": "aaronchou",
+      "source_image": "packer-1587261006"
     },
     "builders": [
       {
         "type": "googlecompute",
         "project_id": "{{user `project_id`}}",
-        "source_image": "packer-1587261006",
-        "disk_size": "150",
+        "source_image": "{{user `source_image`}}",
+        "disk_size": "120",
         "zone": "asia-east1-a",
         "image_description": "created-with-packer",
+        "image_name": "litecoin-dev-{{timestamp}}",
         "ssh_username": "aaronchou",
         "tags": "packer",
-        "account_file": "../../account.json"
+        "account_file": "../../../../../account.json"
       }
     ],
     "provisioners": [
