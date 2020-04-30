@@ -1,0 +1,43 @@
+{
+    "variables": {
+      "project_id": "sandbox-272805",
+      "bdb_prefix": "/home/aaronchou/storage/litecoin/db4",
+      "litecoin_root": "/home/aaronchou/storage/litecoin",
+      "userId": "aaronchou"
+    },
+    "builders": [
+      {
+        "type": "googlecompute",
+        "project_id": "{{user `project_id`}}",
+        "source_image": "packer-1587261006",
+        "disk_size": "150",
+        "zone": "asia-east1-a",
+        "image_description": "created-with-packer",
+        "ssh_username": "aaronchou",
+        "tags": "packer",
+        "account_file": "../../account.json"
+      }
+    ],
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "litecoin.conf",
+            "destination": "~/litecoin.conf"
+        },
+        {
+            "type": "shell",
+            "inline":[
+                "echo hi litecoin >> ~/storage/litecoin.log",
+                "mkdir .litecoin",
+                "sudo mv ~/litecoin.conf ~/.litecoin/",
+                "mkdir -p ~/litecoin/bin",
+                "sudo chown -R {{user `userId`}}:{{user `userId`}} ~/.litecoin/litecoin.conf",
+                "cd .litecoin",
+                "chmod 0600 litecoin.conf",
+                "cp ~/storage/litecoin/src/litecoind ~/litecoin/bin/litecoind",
+                "cp ~/storage/litecoin/src/litecoin-cli ~/litecoin/bin/litecoin-cli"
+            ]
+        }
+    ]
+  }
+  

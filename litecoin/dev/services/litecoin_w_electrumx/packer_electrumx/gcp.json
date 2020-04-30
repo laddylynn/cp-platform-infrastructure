@@ -1,0 +1,56 @@
+{
+    "variables": {
+      "project_id": "sandbox-272805"
+    },
+    "builders": [
+      {
+        "type": "googlecompute",
+        "project_id": "{{user `project_id`}}",
+        "source_image": "ubuntu-1910-eoan-v20200331",
+        "disk_size": "50",
+        "zone": "asia-east1-a",
+        "image_description": "created-with-packer-for-eletrumx-testnet",
+        "ssh_username": "aaronchou",
+        "tags": "packer",
+        "account_file": "../../account.json"
+      }
+    ],
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "electrumx.conf",
+            "destination": "~/electrumx.conf"
+        },
+        {
+            "type": "file",
+            "source": "electrumx.service",
+            "destination": "~/electrumx.service"
+        },
+        {
+            "type": "shell",
+            "inline":[
+                "sudo chown -R root:root ~/electrumx.service",
+                "sudo mv ~/electrumx.service /etc/systemd/system/electrumx.service",  
+                "sudo chown -R root:root ~/electrumx.conf",
+                "sudo mv ~/electrumx.conf /etc/electrumx.conf",
+                "mkdir -p ~/storage",
+                "cd ~/storage",
+                "sudo apt-get update && sudo apt-get install -y python3.7 python3.7-dev python3-pip",
+                "sudo python3.7 -m pip install --no-input --upgrade testresources pip setuptools wheel --no-warn-script-location",
+                "sudo apt install -y python-pip",
+                "sudo apt-get install -y python3-leveldb libleveldb-dev",
+                "sudo pip install nibabel --ignore-installed leveldb",
+                "sudo python3.7 -m pip install --no-input --upgrade aiohttp pylru leveldb plyvel aiorpcx ecdsa",
+                "git clone https://github.com/rayspock/electrumx.git",
+                "cd electrumx",
+                "sudo python3 setup.py install",
+                "mkdir -p ~/storage/leveldb",
+                "sudo apt-get update && sudo apt-get -y install libcap2-bin",
+                "sudo apt autoremove -y",
+                "sudo setcap cap_net_bind_service=+ep /etc/systemd/system/electrumx.service",
+                "sudo python3 setup.py install"
+            ]
+        }
+    ]
+  }
+  
