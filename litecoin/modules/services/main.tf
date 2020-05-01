@@ -1,49 +1,35 @@
 module litecoin_ledger {
   source = "../data-stores"
   project = var.project
-  boot_disk_type = var.boot_disk_type
-  boot_disk_size = var.boot_disk_size
   zone = var.zone
   packer_image = var.litecoin_ledger
   environment = var.environment
   snapshot = var.litecoin_snapshot
+  actor = "litecoin"
 }
 
 module electrumx_ledger {
   source = "../data-stores"
   project = var.project
-  boot_disk_type = var.boot_disk_type
-  boot_disk_size = var.boot_disk_size
   zone = var.zone
   packer_image = var.electrumx_ledger
   environment = var.environment
   snapshot = var.electrumx_snapshot
+  actor = "electrumx"
 }
 
 module networking {
   source = "../networking"
-  ports =  var.ports
-  terms = {
-      network_protocols = var.terms["network_protocols"],
-      source_ranges = var.terms["source_ranges"],
-      ip_cidr_range = var.terms["ip_cidr_range"]
-  }
-  range_name = var.range_name
   region = var.region
   environment = var.environment
 }
 
 module "snapshot_policy" {
   source = "../schedules"
-  start_time = var.start_time
   storage_locations = var.storage_locations
   zone = var.zone
   region = var.region
   project = var.project
-  retention_policy = var.retention_policy
-  label = var.label
-  hours_in_cycle = var.hours_in_cycle
-  snapshot_policy_name = var.snapshot_policy_name 
   environment = var.environment
 }
 
@@ -78,7 +64,7 @@ resource "google_compute_instance" "litecoin" {
 
     subnetwork = module.networking.subnetwork_ip_ranges.self_link
 
-    network_ip = var.network_ip[0]
+    network_ip = local.network_ip[0]
 
     access_config {
       # // Ephemeral IP
@@ -109,7 +95,7 @@ resource "google_compute_instance" "electrumx" {
 
     subnetwork = module.networking.subnetwork_ip_ranges.self_link
 
-    network_ip = var.network_ip[1]
+    network_ip = local.network_ip[1]
 
     access_config {
       # // Ephemeral IP
@@ -120,6 +106,11 @@ resource "google_compute_instance" "electrumx" {
     ignore_changes = [attached_disk]
   }
 }
+
+locals {
+  network_ip = ["10.2.0.2", "10.2.0.3"]
+}
+
 
 
 

@@ -1,5 +1,5 @@
-output "subnetwork" {
-  value = "${module.networking.description}"
+output "vpc_network" {
+  value = "${module.networking.vpc_network}"
 }
 
 output "firewall" {

@@ -1,7 +1,3 @@
-resource "random_id" "disk_id" {
-  byte_length = 4
-}
-
 variable "region" {
   type = string
   default = "asia-east1"
@@ -14,8 +10,7 @@ variable "zone" {
 
 variable "packer_image" {
   type = string
-  default = ""
-  # default = "packer-experiment-1587777660"
+  default = "packer-experiment-1587777660"
 }
 
 variable "environment" {
@@ -33,19 +28,12 @@ variable "ledger_name" {
   default = "level_db"
 }
 
-variable boot_disk_size {
-  description = "Boot Disk Size in GB"
-  type = number
-  default = 20
-}
-
-variable boot_disk_type {
-  type = string
-  default = "pd-ssd"
-}
-
 variable "snapshot" {
   type = string
   default = "iwm5rki8u1x3"
 }
 
+variable "actor" {
+  type = string
+  default = "experiment"
+}
