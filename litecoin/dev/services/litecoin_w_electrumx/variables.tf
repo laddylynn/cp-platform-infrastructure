@@ -14,9 +14,24 @@ variable "zone" {
   default = "asia-east1-b"
 }
 
-variable "packer_image" {
+variable "litecoin_ledger" {
   type = string
-  default = "electrumx-dev-1588233639"
+  default = ""
+}
+
+variable "litecoin_snapshot" {
+  type = string
+  default = "dev-litecoin-9369-asia-east1-b-20200430200528-mle1xklo"
+}
+
+variable "electrumx_ledger" {
+  type = string
+  default = "electrumx-dev-1588291326"
+}
+
+variable "electrumx_snapshot" {
+  type = string
+  default = ""
 }
 
 variable "environment" {
@@ -47,7 +62,7 @@ variable boot_disk_type {
 
 variable "ports" {
   type = list(string)
-  default = ["22", "80", "8080", "1000-2000"]
+  default = ["22", "80", "8080", "3000-4000", "19332"]
 }
 
 variable "range_name" {
@@ -86,6 +101,10 @@ variable "label" {
   default = "litecoin"
 }
 
+variable "user" {
+  default = "aaronchou"
+}
+
 variable "storage_locations" {
   type = list(string)
   default = ["asia-east1"]
@@ -96,12 +115,12 @@ variable "hours_in_cycle" {
   default = 12
 }
 
-variable "metadata_startup_script" {
+variable "electrumx_startup_script" {
   type = string
   default = "sudo systemctl start electrumx"
 }
 
-variable "snapshot" {
+variable "litecoin_startup_script" {
   type = string
   default = ""
 }

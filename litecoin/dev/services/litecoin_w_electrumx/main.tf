@@ -94,11 +94,14 @@ module "litecoin_w_electrumx" {
   hours_in_cycle = var.hours_in_cycle
   start_time = var.start_time
   storage_locations = var.storage_locations
-  packer_image = var.packer_image
-  metadata_startup_script = var.metadata_startup_script
-  snapshot = var.snapshot
+  litecoin_ledger = var.litecoin_ledger
+  electrumx_ledger = var.electrumx_ledger
+  electrumx_startup_script = var.electrumx_startup_script
+  litecoin_startup_script = "cd /home/${var.user}/litecoin/bin; sudo -u ${var.user} ./litecoind -daemon"
   network_ip = var.network_ip
   machine_type = var.machine_type
+  litecoin_snapshot = var.litecoin_snapshot
+  electrumx_snapshot = var.electrumx_snapshot
 }
 
 

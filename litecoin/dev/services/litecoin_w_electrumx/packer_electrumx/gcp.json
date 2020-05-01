@@ -7,7 +7,7 @@
         "type": "googlecompute",
         "project_id": "{{user `project_id`}}",
         "source_image": "ubuntu-1910-eoan-v20200331",
-        "disk_size": "50",
+        "disk_size": "120",
         "zone": "asia-east1-a",
         "image_description": "created-with-packer-for-eletrumx-testnet",
         "image_name": "electrumx-dev-{{timestamp}}",

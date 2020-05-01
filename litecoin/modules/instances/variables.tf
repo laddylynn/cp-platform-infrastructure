@@ -11,11 +11,7 @@ variable "zone" {
   type = string
 }
 
-variable "litecoin_ledger" {
-  type = string
-}
-
-variable "electrumx_ledger" {
+variable "packer_image" {
   type = string
 }
 
@@ -84,18 +80,12 @@ variable "hours_in_cycle" {
   type = number
 }
 
-variable "electrumx_startup_script" {
+variable "metadata_startup_script" {
   type = string
 }
 
-variable "litecoin_startup_script" {
+variable "snapshot" {
   type = string
 }
 
-variable "litecoin_snapshot" {
-  type = string
-}
 
-variable "electrumx_snapshot" {
-  type = string
-}

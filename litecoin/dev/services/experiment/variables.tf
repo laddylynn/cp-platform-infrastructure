@@ -114,5 +114,5 @@ variable "network_ip" {
 
 variable "machine_type" {
   type = string
-  default = "n1-standard-2"
+  default = "f1-micro"
 }
