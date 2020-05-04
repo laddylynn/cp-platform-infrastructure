@@ -30,7 +30,7 @@ variable "ledger_name" {
 
 variable "snapshot" {
   type = string
-  default = "iwm5rki8u1x3"
+  default = ""
 }
 
 variable "actor" {

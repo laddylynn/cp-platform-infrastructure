@@ -1,3 +1,10 @@
+terraform {
+  backend "gcs" {
+    bucket  = "tf-state-coolbitx-dev"
+    prefix  = "terraform/state"
+    credentials = "../../../account.json"
+  }
+}
 
 module ledger {
     source = "../../modules/data-stores"
