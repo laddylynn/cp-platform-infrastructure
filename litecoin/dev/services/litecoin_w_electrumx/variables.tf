@@ -16,22 +16,22 @@ variable "zone" {
 
 variable "litecoin_ledger" {
   type = string
-  default = ""
+  default = "litecoin-dev-1588491408"
 }
 
 variable "litecoin_snapshot" {
   type = string
-  default = "dev-litecoin-23bc-asia-east1-b-20200501080419-iz9vn4fz"
+  default = ""
 }
 
 variable "electrumx_ledger" {
   type = string
-  default = ""
+  default = "electrumx-dev-1588491394"
 }
 
 variable "electrumx_snapshot" {
   type = string
-  default = "dev-litecoin-037a-asia-east1-b-20200501080419-0tc5e4wi"
+  default = ""
 }
 
 variable "environment" {
@@ -50,7 +50,7 @@ variable "name" {
 }
 
 variable "user" {
-  default = "aaronchou"
+  default = "coolbitx"
 }
 
 variable "storage_locations" {
@@ -60,12 +60,12 @@ variable "storage_locations" {
 
 variable "electrumx_startup_script" {
   type = string
-  default = "sudo systemctl start electrumx"
+  default = "sudo systemctl start electrumx && sudo service google-fluentd start"
 }
 
 variable "litecoin_startup_script" {
   type = string
-  default = ""
+  default = "sudo service google-fluentd start"
 }
 
 variable "machine_type" {

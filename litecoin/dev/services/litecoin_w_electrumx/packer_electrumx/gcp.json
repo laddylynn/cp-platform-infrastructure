@@ -1,17 +1,20 @@
 {
     "variables": {
-      "project_id": "sandbox-272805"
+      "project_id": "sandbox-272805",
+      "ssh_username": "coolbitx",
+      "source_image": "ubuntu-1910-eoan-v20200331",
+      "google_application_credentials": "/etc/google/auth/application_default_credentials.json"
     },
     "builders": [
       {
         "type": "googlecompute",
         "project_id": "{{user `project_id`}}",
-        "source_image": "ubuntu-1910-eoan-v20200331",
+        "source_image": "{{user `source_image`}}",
         "disk_size": "120",
         "zone": "asia-east1-a",
         "image_description": "created-with-packer-for-eletrumx-testnet",
         "image_name": "electrumx-dev-{{timestamp}}",
-        "ssh_username": "aaronchou",
+        "ssh_username": "{{user `ssh_username`}}",
         "tags": "packer",
         "account_file": "../../../../../account.json"
       }
@@ -28,14 +31,19 @@
             "destination": "~/electrumx.service"
         },
         {
+            "type": "file",
+            "source": "../../../../../account.json",
+            "destination": "~/temp.json"
+        },
+        {
             "type": "shell",
             "inline":[
                 "sudo chown -R root:root ~/electrumx.service",
                 "sudo mv ~/electrumx.service /etc/systemd/system/electrumx.service",  
                 "sudo chown -R root:root ~/electrumx.conf",
                 "sudo mv ~/electrumx.conf /etc/electrumx.conf",
-                "mkdir -p ~/storage",
-                "cd ~/storage",
+                "mkdir -p /home/{{user `ssh_username`}}/storage",
+                "cd /home/{{user `ssh_username`}}/storage",
                 "sudo apt-get update && sudo apt-get install -y python3.7 python3.7-dev python3-pip",
                 "sudo python3.7 -m pip install --no-input --upgrade testresources pip setuptools wheel --no-warn-script-location",
                 "sudo apt install -y python-pip",
@@ -45,11 +53,27 @@
                 "git clone https://github.com/rayspock/electrumx.git",
                 "cd electrumx",
                 "sudo python3 setup.py install",
-                "mkdir -p ~/storage/leveldb",
+                "mkdir -p /home/{{user `ssh_username`}}/storage/leveldb",
                 "sudo apt-get update && sudo apt-get -y install libcap2-bin",
                 "sudo apt autoremove -y",
                 "sudo setcap cap_net_bind_service=+ep /etc/systemd/system/electrumx.service",
                 "sudo python3 setup.py install"
+            ]
+        },
+        {
+            "type": "shell",
+            "inline":[
+               "sudo mkdir -p /etc/google/auth",
+               "sudo mv ~/temp.json {{ user `google_application_credentials` }}",
+               "sudo chown root:root {{ user `google_application_credentials` }}",
+               "sudo chmod 0400 {{ user `google_application_credentials` }}",
+               "curl -sSO https://dl.google.com/cloudagents/add-logging-agent-repo.sh",
+               "sudo bash add-logging-agent-repo.sh",
+               "sudo apt-get update",
+               "sudo apt-cache madison google-fluentd",
+               "sudo apt-get install -y 'google-fluentd=1.*'",
+               "sudo apt-get install google-fluentd",
+               "sudo apt-get install -y google-fluentd-catch-all-config-structured"
             ]
         }
     ]

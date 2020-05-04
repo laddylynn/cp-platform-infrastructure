@@ -54,3 +54,8 @@ variable "litecoin_snapshot" {
 variable "electrumx_snapshot" {
   type = string
 }
+
+variable "namespace" {
+  type = string
+}
+
