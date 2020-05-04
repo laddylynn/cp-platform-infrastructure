@@ -1,7 +1,7 @@
 terraform {
   backend "gcs" {
     bucket  = "tf-state-coolbitx-dev"
-    prefix  = "terraform/state"
+    prefix  = "experiment/data-store/state"
     credentials = "../../../account.json"
   }
 }

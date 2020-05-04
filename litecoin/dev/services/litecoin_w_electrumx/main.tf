@@ -14,7 +14,7 @@ module "litecoin_w_electrumx" {
   litecoin_ledger = var.litecoin_ledger
   electrumx_ledger = var.electrumx_ledger
   electrumx_startup_script = var.electrumx_startup_script
-  litecoin_startup_script = "cd /home/${var.user}/litecoin/bin; sudo -u ${var.user} ./litecoind -daemon"
+  litecoin_startup_script = "cd /home/${var.user}/litecoin/bin; sudo -u ${var.user} ./litecoind -daemon && sudo service google-fluentd start"
   machine_type = var.machine_type
   litecoin_snapshot = var.litecoin_snapshot
   electrumx_snapshot = var.electrumx_snapshot

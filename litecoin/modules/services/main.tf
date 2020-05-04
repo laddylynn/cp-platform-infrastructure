@@ -1,3 +1,7 @@
+resource "random_id" "instance_id" {
+  byte_length = 2
+}
+
 module litecoin_ledger {
   source = "../data-stores"
   project = var.project
@@ -46,7 +50,7 @@ resource "google_compute_disk_resource_policy_attachment" "attachment2" {
 }
 
 resource "google_compute_instance" "litecoin" {
-  name         = "${var.environment}-litecoin-instance"
+  name         = "${var.environment}-litecoin-instance-${random_id.instance_id.hex}"
   machine_type = var.machine_type
 
   boot_disk {
@@ -77,7 +81,7 @@ resource "google_compute_instance" "litecoin" {
 }
 
 resource "google_compute_instance" "electrumx" {
-  name         = "${var.environment}-electrumx-instance"
+  name         = "${var.environment}-electrumx-instance-${random_id.instance_id.hex}"
   machine_type = var.machine_type
 
   boot_disk {

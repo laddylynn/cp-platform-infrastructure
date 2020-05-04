@@ -1,5 +1,5 @@
 
- resource "random_id" "disk_id" {
+resource "random_id" "disk_id" {
   byte_length = 2
 }
 

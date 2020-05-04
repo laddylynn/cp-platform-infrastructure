@@ -1,0 +1,8 @@
+region = "asia-northeast1"
+zone = "asia-northeast1-b"
+packer_image = "packer-1588562942"
+environment = "dev"
+project = "sandbox-272805"
+ledger_name = "level_db"
+snapshot = ""
+actor = "experiment"

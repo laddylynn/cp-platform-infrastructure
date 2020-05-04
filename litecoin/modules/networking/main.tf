@@ -14,7 +14,7 @@ resource "google_compute_subnetwork" "network-with-private-secondary-ip-ranges" 
 }
 
 resource "google_compute_network" "vpc_network" {
-  name                    = "${var.environment}-litecoin-electrumx-network"
+  name                    = "${var.environment}-litecoin-electrumx-network-${random_id.instance_id.hex}"
   auto_create_subnetworks = false
 }
 
