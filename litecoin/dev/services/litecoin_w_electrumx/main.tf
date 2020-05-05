@@ -1,5 +1,11 @@
+
 terraform {
   required_version = ">= 0.12, < 0.13"
+  backend "gcs" {
+    bucket  = "tf-state-coolbitx-dev"
+    prefix  = "experiment/services/state"
+    credentials = "../../../../account.json"
+  }
 }
 
 module "litecoin_w_electrumx" {
