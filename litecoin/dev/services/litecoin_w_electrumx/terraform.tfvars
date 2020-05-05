@@ -1,10 +1,10 @@
 snapshot_policy_name = "litecoin-snapshot-policy"
 region = "asia-northeast1"
 zone = "asia-northeast1-b"
-litecoin_ledger = ""
-litecoin_snapshot = "snapshot-litecoin-dev-2"
-electrumx_ledger = ""
-electrumx_snapshot = "snapshot-electrumx-dev"
+litecoin_ledger = ""  # default ledger -> litecoin-dev-1588491408
+litecoin_snapshot = "dev-litecoin-4ea3-asia-northeast1-b-20200504202752-qt3svvfq"
+electrumx_ledger = "" # default ledger -> electrumx-dev-1588491394
+electrumx_snapshot = "dev-electrumx-9909-asia-northeast1-b-20200504202752-n7hhuoit"
 environment = "dev"
 project = "sandbox-272805"
 name = "experiment"
